@@ -52,7 +52,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 
         <button
           onClick={() => onAddToCart(product)}
-          className="flex w-full items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+          className="flex w-full cursor-pointer items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none"
         >
           <ShoppingCart className="mr-2 h-6 w-6" />
           Add to cart
