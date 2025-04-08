@@ -2,7 +2,8 @@
 
 ## Goal
 
-Implement client-side routing to create separate views for your products and shopping cart. Use the Context API to manage global state and avoid prop drilling.
+Implement client-side routing to create separate views for your products and shopping cart. Use the Context API to
+manage global state and avoid prop drilling.
 
 ## Requirements
 
@@ -14,7 +15,7 @@ Implement client-side routing to create separate views for your products and sho
   ```
 - Set up the router in your application:
 
-  - Wrap your `App` component with `BrowserRouter` in `main.tsx`
+    - Wrap your `App` component with `BrowserRouter` in `main.tsx`
 
   ```tsx
   import { BrowserRouter } from "react-router-dom";
@@ -32,8 +33,8 @@ Implement client-side routing to create separate views for your products and sho
 
 - Create a `pages` directory in your `src` folder
 - Create the following page components:
-  - `ProductsPage.tsx`: Move your product listing logic here
-  - `CartPage.tsx`: Create a new component to display cart items
+    - `ProductsPage.tsx`: Move your product listing logic here
+    - `CartPage.tsx`: Create a new component to display cart items
 
 ### 3. Set Up Routes
 
@@ -123,7 +124,7 @@ Implement client-side routing to create separate views for your products and sho
 - In `main.tsx`, add the `CartProvider` around your `App`:
 
   ```tsx
-  import { CartProvider } from "./context/CartContext";
+  
 
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -139,20 +140,20 @@ Implement client-side routing to create separate views for your products and sho
 ### 7. Use the Context in Components
 
 - Update the components to use the context instead of props:
-  - In `Header.tsx`, get the cart count from context:
-    ```tsx
-    const { cart } = useCart();
-    const cartCount = cart.length;
-    ```
-  - In `ProductsPage.tsx`, get the `addToCart` function from context:
-    ```tsx
-    const { addToCart } = useCart();
-    ```
-  - In `CartPage.tsx`, display items from the cart context:
-    ```tsx
-    const { cart } = useCart();
-    // Render cart items
-    ```
+    - In `Header.tsx`, get the cart count from context:
+      ```tsx
+      const { cart } = useCart();
+      const cartCount = cart.length;
+      ```
+    - In `ProductsPage.tsx`, get the `addToCart` function from context:
+      ```tsx
+      const { addToCart } = useCart();
+      ```
+    - In `CartPage.tsx`, display items from the cart context:
+      ```tsx
+      const { cart } = useCart();
+      // Render cart items
+      ```
 
 ## Optional Bonus Ideas
 
@@ -178,9 +179,9 @@ If you finish early or want an extra challenge, try one of these:
 ## Testing Your Implementation
 
 - Test your implementation by:
-  - Navigating between the home page and cart page
-  - Adding products to the cart from the home page
-  - Verifying that the cart page displays the correct items
-  - Checking that the cart count updates across all components
+    - Navigating between the home page and cart page
+    - Adding products to the cart from the home page
+    - Verifying that the cart page displays the correct items
+    - Checking that the cart count updates across all components
 
 Good luck implementing routing and context in your application!

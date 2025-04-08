@@ -4,7 +4,7 @@ function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [reloadKey, setReloadKey] = useState(0); // used to trigger refetch
+  const [reloadKey, setReloadKey] = useState(0);
 
   const refetch = useCallback(() => {
     setReloadKey((prev) => prev + 1);
