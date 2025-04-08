@@ -2,7 +2,8 @@
 
 ## Goal
 
-Refactor your application to use the `useEffect` hook for data fetching. Implement proper loading and error states to enhance the user experience.
+Refactor your application to use the `useEffect` hook for data fetching. Implement proper loading and error states to
+enhance the user experience.
 
 ## Requirements
 
@@ -53,9 +54,9 @@ Refactor your application to use the `useEffect` hook for data fetching. Impleme
 ### 4. Conditional Rendering
 
 - Use conditional rendering to show different UI states:
-  - Show a loading indicator when `isLoading` is true
-  - Show an error message when `error` is not null
-  - Show the product list when neither loading nor error
+    - Show a loading indicator when `isLoading` is true
+    - Show an error message when `error` is not null
+    - Show the product list when neither loading nor error
 
 ### 5. Clean API Integration
 
@@ -83,7 +84,8 @@ If you finish early or want an extra challenge, try one of these:
   }
   ```
 
-- Implement the hook in your component: `const { data: products, isLoading, error } = useFetch<Product[]>('/api/products');`
+- Implement the hook in your component:
+  `const { data: products, isLoading, error } = useFetch<Product[]>('/api/products');`
 
 ### 2. Retry Mechanism
 
@@ -99,9 +101,9 @@ If you finish early or want an extra challenge, try one of these:
 ## Testing Your Implementation
 
 - Test your implementation by:
-  - Refreshing the page to see the loading state
-  - Temporarily changing the API URL to an invalid one to see the error state
-  - Checking that products display correctly when the API responds successfully
-  - Verifying that all state transitions happen smoothly
+    - Refreshing the page to see the loading state
+    - Temporarily changing the API URL to an invalid one to see the error state
+    - Checking that products display correctly when the API responds successfully
+    - Verifying that all state transitions happen smoothly
 
 Good luck implementing data fetching with useEffect!
