@@ -2,6 +2,7 @@ import { Product } from "./types/Product.ts";
 import ProductList from "./components/ProductList.tsx";
 import Header from "./components/Header.tsx";
 import { useEffect, useState } from "react";
+import { useToast } from "./utils/useToast.tsx";
 
 const storeProducts: Product[] = [
   {
@@ -69,14 +70,26 @@ const storeProducts: Product[] = [
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
+  const { showToast } = useToast();
+
+  const handleAddToCart = (product: Product) => {
+    if (!cart.find((element) => element.id === product.id)) {
+      setCart((prevCart) => [...prevCart, product]);
+      showToast(`✔️ Item: ${product.name} added to cart.`);
+      console.log("cart items: ", cart);
+    } else {
+      showToast(`❌ Item: ${product.name} already exists!`);
+    }
+  };
 
   useEffect(() => {
     setProducts(storeProducts);
   }, []);
   return (
     <main className="container mx-auto flex flex-col justify-center px-48">
-      <Header />
-      <ProductList products={products} />
+      <Header cartCount={cart.length} />
+      <ProductList products={products} onAddToCart={handleAddToCart} />
     </main>
   );
 }

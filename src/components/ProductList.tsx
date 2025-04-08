@@ -3,16 +3,17 @@ import ProductCard from "./ProductCard.tsx";
 
 type ProductListProps = {
   products: Product[];
+  onAddToCart: (product: Product) => void;
 };
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({ products, onAddToCart }: ProductListProps) => {
   return (
     <div
       className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2 lg:grid-cols-3"
       data-testid="product-list-container"
     >
       {products && products.length > 0 ? (
-        products.map((product: Product) => <ProductCard key={product.id} product={product} />)
+        products.map((product: Product) => <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />)
       ) : (
         <div className="col-span-full py-10 text-center">
           <p className="text-gray-500">No products found.</p>
