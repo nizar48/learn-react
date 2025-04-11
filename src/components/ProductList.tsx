@@ -1,13 +1,18 @@
 import { Product } from "../types/Product.ts";
 import ProductCard from "./ProductCard.tsx";
-import { useCart } from "../context/cartContext.tsx";
+import { useAppDispatch } from "../store/hooks";
+import { addToCart } from "../store/cartSlice";
 
 type ProductListProps = {
   products: Product[];
 };
 
 const ProductList = ({ products }: ProductListProps) => {
-  const { addToCart } = useCart();
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+  };
 
   if (!products?.length) {
     return (
@@ -23,7 +28,7 @@ const ProductList = ({ products }: ProductListProps) => {
       data-testid="product-list-container"
     >
       {products.map((product: Product) => (
-        <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+        <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
       ))}
     </div>
   );

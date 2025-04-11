@@ -1,11 +1,14 @@
-import { useCart } from "../context/cartContext.tsx";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { selectCartItems, selectCartTotal, removeFromCart } from "../store/cartSlice";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { cart, removeItem } = useCart();
+  const cart = useAppSelector(selectCartItems);
+  const total = useAppSelector(selectCartTotal);
+  const dispatch = useAppDispatch();
 
-  const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.product.price * item.count, 0).toFixed(2);
+  const handleRemoveFromCart = (id: string) => {
+    dispatch(removeFromCart(id));
   };
 
   return (
@@ -33,13 +36,7 @@ const CartPage = () => {
                     Product
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Quantity
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                     Price
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Total
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                     Action
@@ -48,33 +45,24 @@ const CartPage = () => {
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {cart.map((item) => (
-                  <tr key={item.product.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={item.id}>
+                    <td className="whitespace-nowrap px-6 py-4">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0 rounded-md">
-                          <img src={item.product.imageUrl} alt={item.product.name} />
+                        <div className="h-10 w-10 flex-shrink-0">
+                          <img className="h-10 w-10 rounded-full" src={item.imageUrl} alt={item.name} />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{item.product.name}</div>
-                          <div className="text-sm text-gray-500">{item.product.id}</div>
+                          <div className="text-sm font-medium text-gray-900">{item.name}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center justify-center">
-                        <span className="px-2">{item.count}</span>
-                      </div>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="text-sm text-gray-900">${item.price.toFixed(2)}</div>
                     </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                      ${item.product.price?.toFixed(2) || "0.00"}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                      ${(item.product.price * item.count).toFixed(2) || "0.00"}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap">
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                       <button
-                        onClick={() => removeItem(item.product)}
-                        className="flex w-fit items-center justify-center rounded-md px-5 py-2.5 text-center text-sm font-medium text-red-500 hover:underline"
+                        onClick={() => handleRemoveFromCart(item.id)}
+                        className="text-red-600 hover:text-red-900"
                       >
                         Remove
                       </button>
@@ -82,14 +70,15 @@ const CartPage = () => {
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={2} className="px-6 py-4 text-right text-sm font-medium text-gray-900">
+                    Total:
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">${total.toFixed(2)}</td>
+                </tr>
+              </tfoot>
             </table>
-          </div>
-
-          <div className="mt-8 border-t pt-6">
-            <div className="mb-6 flex items-center justify-between">
-              <span className="text-lg font-medium text-gray-700">Subtotal:</span>
-              <span className="text-xl font-bold text-gray-900">${calculateTotal()}</span>
-            </div>
           </div>
         </div>
       )}

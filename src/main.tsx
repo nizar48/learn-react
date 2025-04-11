@@ -4,15 +4,16 @@ import "./index.css";
 import App from "./App.tsx";
 import { ToastProvider } from "./utils/useToast.tsx";
 import { BrowserRouter } from "react-router-dom";
-import { CartProvider } from "./context/cartContext.tsx";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ToastProvider>
-        <CartProvider>
+        <ReduxProvider store={store}>
           <App />
-        </CartProvider>
+        </ReduxProvider>
       </ToastProvider>
     </BrowserRouter>
   </StrictMode>,
